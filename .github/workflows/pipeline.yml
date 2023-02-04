@@ -25,10 +25,10 @@ jobs:
         run: npm run build --prefix apollo-express
       - name: npm build frontend
         run: npm run build --prefix vite-ts
-      - name: e2e test
-        uses: cypress-io/github-action@v2
       - name: run backend
         run: npm run start --prefix apollo-express
+      - name: e2e test
+        uses: cypress-io/github-action@v2
         with:
           command: npm run test
           start: npm run start
