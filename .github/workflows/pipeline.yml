@@ -31,9 +31,9 @@ jobs:
           command: npm run test
           start: | 
             npm run start --prefix ../apollo-express
-            npm run start
+            npm run start -- --host
           working-directory: vite-ts
-          wait-on: http://localhost:4173
+          wait-on: http://localhost:4173/
   deploy:
     name: Deploy application
     needs: [tests]
