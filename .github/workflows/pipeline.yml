@@ -29,7 +29,9 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           command: npm run test --prefix vite-ts
-          start: npm run start --prefix apollo-express, npm run start --prefix vite-ts
+          start: |
+            npm run start --prefix apollo-express
+            npm run start --prefix vite-ts
           wait-on: http://localhost:4173/
   deploy:
     name: Deploy application
