@@ -6,7 +6,7 @@ import './index.css'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: import.meta.env.VITE_BACKEND_URL,
+  uri: import.meta.env.NODE_ENV === "production" ? import.meta.env.VITE_BACKEND_URL : "http://localhost:4000/graphql",
   cache: new InMemoryCache(),
 });
 
