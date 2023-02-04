@@ -1,0 +1,13 @@
+Dockerfile
+.dockerignore
+node_modules
+.git
+dist
+build
+
+**/Dockerfile
+**/.dockerignore
+**/node_modules
+**/.git
+**/dist
+**/build

@@ -1,0 +1,59 @@
+name: Deployment Pipeline
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+jobs:
+  tests:
+    name: Run E2E tests
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+      - name: npm install backend
+        run: npm install --prefix apollo-express
+      - name: npm install frontend
+        run: npm install --prefix vite-ts
+      - name: npm build backend
+        run: npm build --prefix apollo-express
+      - name: npm build frontend
+        run: npm build --prefix vite-ts
+      - name: e2e test
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test --prefix vite-ts
+          start: npm run start --prefix apollo-express, npm run start --prefix vite-ts
+          wait-on: http://localhost:4173/
+  deploy:
+    name: Deploy application
+    needs: [tests]
+    if: ${{ (github.event_name == 'push') && (!contains(toJson(github.event.commits.*.message), '#skip')) }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+  tag_release:
+    permissions: write-all
+    name: Tag release
+    needs: [deploy]
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.sha }}
+        fetch-depth: '0'
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.55.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DEFAULT_BUMP: patch
+        WITH_V: true

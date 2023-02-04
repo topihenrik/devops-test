@@ -24,6 +24,8 @@ const server = new ApolloServer<MyContext>({
 });
 await server.start();
 app.use(cors(), morgan("dev"));
+//if (process.env.NODE_ENV === "production") 
+app.use(express.static("front"));
 app.use(
   '/graphql',
   cors<cors.CorsRequest>(),

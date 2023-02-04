@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm run compile --prefix apollo-express && npm run build --prefix vite-ts"
+    "build": "npm run compile --prefix apollo-express && npm run build --prefix vite-ts && cp -R ./vite-ts/dist ./apollo-express/dist",
+    "start": "npm start --prefix apollo-express",
+    "deploy": "npm run deploy --prefix apollo-express"
   },
   "repository": {
     "type": "git",
