@@ -11,7 +11,6 @@ RUN volta install node@${NODE_VERSION}
 RUN mkdir /app
 WORKDIR /app
 COPY . .
-ENV VITE_BACKEND_URL /graphql
 
 # NODE_ENV development required
 ENV NODE_ENV development
