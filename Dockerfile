@@ -43,7 +43,7 @@ ENV NODE_ENV production
 COPY --from=builder-ts /app/apollo-express/build  /app/build
 COPY --from=builder-ts /app/apollo-express/front /app/front
 COPY --from=builder-ts /app/apollo-express/src/*.graphql /app/src/
-COPY --from=builder-ts /app/apollo-express/package*.json /app
+COPY --from=builder-ts /app/apollo-express/package*.json /app/
 RUN npm install
 
 ####################################################################################################################
