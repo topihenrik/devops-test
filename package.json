@@ -1,0 +1,20 @@
+{
+  "name": "_final-project-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run compile --prefix apollo-express && npm run build --prefix vite-ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/topihenrik/devops-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/topihenrik/devops-test/issues"
+  },
+  "homepage": "https://github.com/topihenrik/devops-test#readme"
+}
