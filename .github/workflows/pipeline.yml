@@ -22,9 +22,9 @@ jobs:
       - name: npm install frontend
         run: npm install --prefix vite-ts
       - name: npm build backend
-        run: npm build --prefix apollo-express
+        run: npm run build --prefix apollo-express
       - name: npm build frontend
-        run: npm build --prefix vite-ts
+        run: npm run build --prefix vite-ts
       - name: e2e test
         uses: cypress-io/github-action@v2
         with:
