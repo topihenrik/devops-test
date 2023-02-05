@@ -1,4 +1,3 @@
-// npm install @apollo/server express graphql cors body-parser
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
@@ -6,14 +5,23 @@ import express from 'express';
 import http from 'http';
 import cors from 'cors';
 import morgan from "morgan";
-//import { json } from 'body-parser';
-import { /* typeDefs, */ resolvers } from './resolvers.js';
+import mongoose from 'mongoose';
+import { resolvers } from './resolvers.js';
 import { readFileSync } from 'fs';
 const typeDefs = readFileSync('./src/schema.graphql', { encoding: 'utf-8' });
 
+const mongoURI = "mongodb://127.0.0.1:27017/devops-test";
+mongoose.set("strictQuery", true);
+mongoose.connect(mongoURI).then(() => {
+  console.log("🥭 Connected to MongoDB!")
+}).catch((error) => {
+  console.log("Error connection to MongoDB:", error.message)
+});
+
+
 export interface MyContext {
   token?: String;
-}
+};
 
 const app = express();
 const httpServer = http.createServer(app);
