@@ -10,7 +10,7 @@ jobs:
   tests:
     name: Run E2E tests
     services:
-      mongodb:
+      mongo:
         image: mongo
         env:
           MONGO_INITDB_DATABASE: devops-test
