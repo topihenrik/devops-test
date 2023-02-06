@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import { useQuery } from "@apollo/client";
 import { gql } from "./__generated__/gql";
@@ -13,7 +12,6 @@ const GET_BOOKS = gql(/* GraphQL */`
 `);
 
 function App() {
-    const [count, setCount] = useState(0);
     const { loading, error, data } = useQuery(GET_BOOKS);
 
     if (loading) return <p>Loading...</p>;
