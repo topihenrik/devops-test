@@ -11,8 +11,6 @@ const books = [
     },
 ];
 
-
-
 /* const typeDefs = `#graphql
   type Book {
     title: String
