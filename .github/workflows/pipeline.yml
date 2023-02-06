@@ -10,6 +10,13 @@ jobs:
   tests:
     name: Run E2E tests
     runs-on: ubuntu-20.04
+    services:
+      mongo:
+        image: mongo
+        env:
+          MONGO_INITDB_DATABASE: devops-test
+        ports:
+          - 27017:27017
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -27,6 +34,8 @@ jobs:
         run: npm run lint --prefix apollo-express
       - name: lint frontend
         run: npm run lint --prefix vite-ts
+      - name: init mongodb
+        run: node ./apollo-express/build/tests/init-mongodb.js
       - name: e2e test
         uses: cypress-io/github-action@v2
         with:

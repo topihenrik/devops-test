@@ -6,18 +6,11 @@ import express from "express";
 import http from "http";
 import cors from "cors";
 import morgan from "morgan";
-import mongoose from "mongoose";
 import { resolvers } from "./resolvers.js";
 import { readFileSync } from "fs";
 const typeDefs = readFileSync("./src/schema.graphql", { encoding: "utf-8" });
 
-const mongoURI = process.env.NODE_ENV === "production" ? process.env.DB_URI : "mongodb://127.0.0.1:27017/devops-test";
-mongoose.set("strictQuery", true);
-mongoose.connect(mongoURI).then(() => {
-    console.log("🥭 Connected to MongoDB!")
-}).catch((error) => {
-    console.log("Error connection to MongoDB:", error.message)
-});
+import "./mongodb.js";
 
 const app = express();
 const httpServer = http.createServer(app);
