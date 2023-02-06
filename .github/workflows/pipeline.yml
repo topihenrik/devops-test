@@ -34,10 +34,10 @@ jobs:
         run: npm run lint --prefix apollo-express
       - name: lint frontend
         run: npm run lint --prefix vite-ts
-      - name: e2e test
-        uses: cypress-io/github-action@v2
       - name: init mongodb
         run: node ./apollo-express/build/tests/init-mongodb.js
+      - name: e2e test
+        uses: cypress-io/github-action@v2
         with:
           command: npm run test
           start: | 
