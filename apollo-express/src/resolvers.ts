@@ -1,32 +1,11 @@
 import { Resolvers } from "./__generated__/resolvers-types";
-
-const books = [
-    {
-        title: "The Awakening",
-        author: "Kate Chopin",
-    },
-    {
-        title: "City of Glass",
-        author: "Paul Auster",
-    },
-];
-
-/* const typeDefs = `#graphql
-  type Book {
-    title: String
-    author: String
-  }
-
-  type Query {
-    books: [Book]
-  }
-`; */
+import Book from "./models/book.js";
 
 const resolvers: Resolvers = {
     Query: {
-        books: () => books,
+        books: async () =>  Book.find({}),
     },
 };
 
 
-export { /* typeDefs, */ resolvers };
+export { resolvers };
