@@ -14,8 +14,8 @@ COPY . .
 
 # Installs
 ENV NODE_ENV development
-RUN npm install --prefix apollo-express
-RUN npm install --prefix vite-ts
+RUN npm ci --prefix apollo-express
+RUN npm ci --prefix vite-ts
 
 # Builds
 ENV NODE_ENV production
@@ -44,7 +44,7 @@ COPY --from=builder-ts /app/apollo-express/build  /app/build
 COPY --from=builder-ts /app/apollo-express/front /app/front
 COPY --from=builder-ts /app/apollo-express/src/*.graphql /app/src/
 COPY --from=builder-ts /app/apollo-express/package*.json /app/
-RUN npm install
+RUN npm ci
 
 ####################################################################################################################
 
