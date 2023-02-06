@@ -24,7 +24,7 @@ RUN npm run build --prefix apollo-express
 RUN npm run build --prefix vite-ts
 
 # Copy frontend to backend
-RUN cp -R ./vite-ts/dist ./apollo-express/front
+RUN cp -R ./vite-ts/build ./apollo-express/front
 
 ####################################################################################################################
 
