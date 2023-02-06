@@ -12,14 +12,14 @@ RUN mkdir /app
 WORKDIR /app
 COPY . .
 
-# NODE_ENV development required
-ENV NODE_ENV development
 # Installs
+ENV NODE_ENV development
 RUN npm ci --prefix apollo-express
 RUN npm ci --prefix vite-ts
 
-ENV NODE_ENV production
 # Builds
+ENV NODE_ENV production
+ENV VITE_NODE_ENV production
 RUN npm run build --prefix apollo-express
 RUN npm run build --prefix vite-ts
 
