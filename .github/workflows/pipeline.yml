@@ -22,18 +22,18 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18"
-      - name: npm install backend
+      - name: install backend
         run: npm install --prefix apollo-express
-      - name: npm install frontend
+      - name: install frontend
         run: npm install --prefix vite-ts
-      - name: npm build backend
-        run: npm run build --prefix apollo-express
-      - name: npm build frontend
-        run: npm run build --prefix vite-ts
       - name: lint backend
         run: npm run lint --prefix apollo-express
       - name: lint frontend
         run: npm run lint --prefix vite-ts
+      - name: build backend
+        run: npm run build --prefix apollo-express
+      - name: build frontend
+        run: npm run build --prefix vite-ts
       - name: init mongodb
         run: node ./apollo-express/build/tests/init-mongodb.js
       - name: e2e test
