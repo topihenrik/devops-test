@@ -34,14 +34,12 @@ jobs:
         run: npm run build --prefix apollo-express
       - name: build frontend
         run: npm run build --prefix vite-ts
-      - name: init mongodb
-        run: node ./apollo-express/build/tests/init-mongodb.js
       - name: e2e test
         uses: cypress-io/github-action@v2
         with:
           command: npm run test
           start: | 
-            npm run start --prefix ../apollo-express
+            npm run start:e2e --prefix ../apollo-express
             npm run start -- --host
           working-directory: vite-ts
           wait-on: http://localhost:4173/

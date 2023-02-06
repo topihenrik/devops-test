@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node ./build/index.js",
+    "start:e2e": "cross-env NODE_ENV=test node ./build/index.js",
     "build": "graphql-codegen --config codegen.yml && tsc",
     "dev": "concurrently  --names \"CodeGen,TS,Nodemon\" -c \"bgYellow.black,bgBlue.black,bgMagenta.black\" \"graphql-codegen --watch './src/**/*.ts'\"  \"tsc -w \" \"nodemon ./build/index.js \"",
     "lint": "eslint ."
@@ -15,6 +16,7 @@
   "dependencies": {
     "@apollo/server": "^4.3.2",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "express": "^4.18.2",
     "graphql": "^16.6.0",
     "mongoose": "^6.9.0",
