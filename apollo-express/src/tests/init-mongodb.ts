@@ -24,8 +24,7 @@ const initializeForTests = async () => {
         const mongoURI = "mongodb://127.0.0.1:27017/devops-test";
         mongoose.set("strictQuery", true);
         const db = await mongoose.connect(mongoURI);
-        console.log("🥭 Connected to MongoDB!");
-
+        
         // Delete old data
         const collections = mongoose.connection.collections;
         for (const key in collections) {
@@ -35,11 +34,12 @@ const initializeForTests = async () => {
         // Initialize data
         await Book.insertMany(initBooks);
         await db.disconnect()
+        console.log("🥭 Added initial data to MongoDB!");
     } catch(err) {
         console.error(err);
     }
 }
 
-export { initializeForTests };
+initializeForTests();
 
 //initialize();
