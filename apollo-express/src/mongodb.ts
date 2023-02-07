@@ -7,10 +7,11 @@ const mongoURI = process.env.NODE_ENV === "production"
         ? "mongodb://127.0.0.1:27017/devops-dev"    // development
         : "mongodb://127.0.0.1:27017/devops-test";  // testing
 
-mongoose.set("strictQuery", true);
-mongoose.connect(mongoURI).then(() => {
+try {
+    mongoose.set("strictQuery", true);
+    await mongoose.connect(mongoURI);
     console.log("🥭 Connected to MongoDB!")
-    if (process.env.NODE_ENV === "test") initializeForTests();
-}).catch((error) => {
+    if (process.env.NODE_ENV === "test") await initializeForTests();
+} catch (error) {
     console.log("Error connection to MongoDB:", error.message)
-});
+}
